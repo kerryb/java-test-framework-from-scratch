@@ -13,6 +13,10 @@ public class Main {
     }
 
     private static void testValue(String value, String expected) {
-        System.out.println("Expected '" + value + "'; got '" + value + "'.");
+        if (value.equals(expected)) {
+            System.out.println("OK");
+        } else {
+            System.out.println("FAIL: Expected '" + expected + "'; got '" + value + "'.");
+        }
     }
 }
