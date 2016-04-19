@@ -4,27 +4,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FizzBuzzTests {
+public class FizzBuzzTests extends TestSuite {
     private static FizzBuzz fizzBuzz;
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.METHOD)
-    private @interface Test {}
-
-    private class TestFailure {
-        private final String test;
-        private final String message;
-
-        public TestFailure(String test, String message) {
-            this.test = test;
-            this.message = message;
-        }
-
-        public void report() {
-            System.out.println("'" + test.replaceAll("_", " ") + "' failed: " + message);
-
-        }
-    }
 
     public static void main(String[] args) throws Throwable {
         new FizzBuzzTests().run();
@@ -56,15 +37,6 @@ public class FizzBuzzTests {
         }
     }
 
-    private void assertEqual(final String value, final String expected) {
-        if (!value.equals(expected)) {
-            throw new RuntimeException("Expected '" + expected + "'; got '" + value + "'.");
-        }
-    }
-
-    private String pluralise(final int number, final String label) {
-        return number + " " + label + (number == 1 ? "" : "s");
-    }
 
     @Test
     private void converts_3_to_fizz() {
