@@ -1,12 +1,10 @@
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
-
 import java.lang.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class FizzBuzzTests {
     private static FizzBuzz fizzBuzz;
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -29,7 +27,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws Throwable {
-        new Main().run();
+        new FizzBuzzTests().run();
     }
 
     private void run() throws Throwable {
