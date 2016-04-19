@@ -1,6 +1,10 @@
 public class FizzBuzzTests extends TestSet {
-    private static FizzBuzz fizzBuzz = new FizzBuzz();
+    private FizzBuzz fizzBuzz;
 
+    @Override
+    protected void setup() {
+        fizzBuzz = new FizzBuzz();
+    }
     @Test
     public void converts_3_to_fizz() {
         assertEqual(fizzBuzz.say(3), "fizz");

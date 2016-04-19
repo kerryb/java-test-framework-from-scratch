@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestSet {
+    protected void setup() {}
+
     public void run() throws Throwable {
         Method[] methods = getClass().getDeclaredMethods();
         int tests = 0;
@@ -16,6 +18,7 @@ public class TestSet {
             if (method.isAnnotationPresent(Test.class)) {
                 tests++;
                 try {
+                    setup();
                     method.invoke(this);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
