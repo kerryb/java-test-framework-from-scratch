@@ -5,6 +5,7 @@ public class FizzBuzzTests extends TestSet {
     protected void setup() {
         fizzBuzz = new FizzBuzz();
     }
+
     @Test
     public void converts_3_to_fizz() {
         assertEqual(fizzBuzz.say(3), "fizz");

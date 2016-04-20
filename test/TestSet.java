@@ -11,25 +11,10 @@ public class TestSet {
     @Retention(RetentionPolicy.RUNTIME)
     protected @interface Test {}
 
-    protected class TestFailure {
-        private final String test;
-        private final String message;
-
-        public TestFailure(String test, String message) {
-            this.test = test;
-            this.message = message;
-        }
-
-        public void report() {
-            System.out.println("'" + test.replaceAll("_", " ") + "' failed: " + message);
-
-        }
-    }
-
     public void run() throws Throwable {
         Method[] methods = getClass().getDeclaredMethods();
         int tests = 0;
-        List<TestFailure> failures = new ArrayList<>();
+        int failures = 0;
         for (Method method: methods) {
             if (method.isAnnotationPresent(Test.class)) {
                 tests++;
@@ -37,15 +22,13 @@ public class TestSet {
                     setup();
                     method.invoke(this);
                 } catch (InvocationTargetException e) {
-                    failures.add(new TestFailure(method.getName(), e.getCause().getMessage()));
+                    failures++;
+                    System.out.println("'" + method.getName() + "' failed: " + e.getCause().getMessage());
                 }
             }
         }
-        System.out.println("Tests run: " + tests + "; tests failed: " + failures.size());
-        if (!failures.isEmpty()) {
-            for (TestFailure failure: failures) {
-                failure.report();
-            }
+        System.out.println("Tests run: " + tests + "; tests failed: " + failures);
+        if (failures > 0) {
             System.exit(1);
         }
     }
